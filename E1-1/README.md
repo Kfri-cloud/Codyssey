@@ -79,7 +79,7 @@ E1-1/
     └── logs/
         └── docker/
             ├── info.txt
-            ├── hellow-world
+            ├── hello_world.txt
             ├── Ubuntu_1.txt
             ├── Ubuntu_2.txt
             └── docker_practice/
@@ -91,6 +91,8 @@ E1-1/
                 ├── docker_nginx.txt
                 ├── docker_volume
                 └── docker_volume_Non
+        └── git/
+            └── push_evidence.md
 ```
 
 ---
@@ -109,7 +111,7 @@ E1-1/
 | 컨테이너 삭제 후 데이터 유지 | 보완 필요 | 재연결 후 `mydb`는 확인했으나 삭제 명령을 포함한 연속 로그 추가 필요 |
 | Git 설정 및 GitHub 연동 | 완료 | Git 설정·원격 저장소 이미지와 실제 원격 커밋 기록 |
 
-> 평가기준에 직접 포함된 권한 변경과 Dockerfile 빌드는 삭제하지 않고 보완 대상으로 남겼다. MySQL 데이터 영속성은 완료했지만, 사용한 방식은 Docker가 관리하는 이름 있는 볼륨이 아니라 호스트 디렉터리를 연결한 바인드 마운트다.
+> 권한 변경과 Dockerfile 빌드는 실제 출력이 없어 보완 대상으로 남겼다. MySQL은 같은 바인드 마운트에서 `mydb`가 다시 조회됐지만 삭제 명령 출력이 빠져 있으므로 완전한 연속 로그를 추가한 뒤 완료 처리한다.
 
 ---
 
