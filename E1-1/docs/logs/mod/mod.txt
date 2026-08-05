@@ -1,0 +1,69 @@
+Last login: Wed Aug  5 20:15:18 on ttys000
+kfri.2.kfri3714@c6r6s5 ~ % touch test1.txt 
+kfri.2.kfri3714@c6r6s5 ~ % ps
+  PID TTY           TIME CMD
+45707 ttys000    0:00.03 -zsh
+kfri.2.kfri3714@c6r6s5 ~ % ls
+codyssey		Movies			permission-file.sh
+Desktop			Music			Pictures
+Documents		mystudy			Public
+Downloads		OrbStack		test1.txt
+Library			permission-directory
+kfri.2.kfri3714@c6r6s5 ~ % ls -l
+total 8
+drwxr-xr-x   4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  4 16:51 codyssey
+drwx------+ 12 kfri.2.kfri3714  kfri.2.kfri3714   384  8  6 02:08 Desktop
+drwx------+  5 kfri.2.kfri3714  kfri.2.kfri3714   160  8  3 18:50 Documents
+drwx------+ 13 kfri.2.kfri3714  kfri.2.kfri3714   416  8  6 02:13 Downloads
+drwx------@ 84 kfri.2.kfri3714  kfri.2.kfri3714  2688  8  3 19:12 Library
+drwx------   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 13:03 Movies
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:08 Music
+drwxr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 17:42 mystudy
+dr-xr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 19:12 OrbStack
+drwx------   2 kfri.2.kfri3714  kfri.2.kfri3714    64  8  4 16:57 permission-directory
+-rw-r--r--@  1 kfri.2.kfri3714  kfri.2.kfri3714     7  8  4 16:57 permission-file.sh
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:04 Pictures
+drwxr-xr-x+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:03 Public
+-rw-r--r--   1 kfri.2.kfri3714  kfri.2.kfri3714     0  8  6 02:33 test1.txt
+kfri.2.kfri3714@c6r6s5 ~ % 
+kfri.2.kfri3714@c6r6s5 ~ % chmod 744 ./text1.txt 
+chmod: ./text1.txt: No such file or directory
+kfri.2.kfri3714@c6r6s5 ~ % chmod 744 ./test.txt
+chmod: ./test.txt: No such file or directory
+kfri.2.kfri3714@c6r6s5 ~ % chmod 744 ./test1.txt
+kfri.2.kfri3714@c6r6s5 ~ % ls -l
+total 8
+drwxr-xr-x   4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  4 16:51 codyssey
+drwx------+ 12 kfri.2.kfri3714  kfri.2.kfri3714   384  8  6 02:08 Desktop
+drwx------+  5 kfri.2.kfri3714  kfri.2.kfri3714   160  8  3 18:50 Documents
+drwx------+ 13 kfri.2.kfri3714  kfri.2.kfri3714   416  8  6 02:13 Downloads
+drwx------@ 84 kfri.2.kfri3714  kfri.2.kfri3714  2688  8  3 19:12 Library
+drwx------   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 13:03 Movies
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:08 Music
+drwxr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 17:42 mystudy
+dr-xr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 19:12 OrbStack
+drwx------   2 kfri.2.kfri3714  kfri.2.kfri3714    64  8  4 16:57 permission-directory
+-rw-r--r--@  1 kfri.2.kfri3714  kfri.2.kfri3714     7  8  4 16:57 permission-file.sh
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:04 Pictures
+drwxr-xr-x+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:03 Public
+-rwxr--r--   1 kfri.2.kfri3714  kfri.2.kfri3714     0  8  6 02:33 test1.txt
+kfri.2.kfri3714@c6r6s5 ~ % chmod 644 text1.txt
+chmod: text1.txt: No such file or directory
+kfri.2.kfri3714@c6r6s5 ~ % chmod 644 ./test1.txt
+kfri.2.kfri3714@c6r6s5 ~ % ls -l
+total 8
+drwxr-xr-x   4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  4 16:51 codyssey
+drwx------+ 12 kfri.2.kfri3714  kfri.2.kfri3714   384  8  6 02:08 Desktop
+drwx------+  5 kfri.2.kfri3714  kfri.2.kfri3714   160  8  3 18:50 Documents
+drwx------+ 13 kfri.2.kfri3714  kfri.2.kfri3714   416  8  6 02:13 Downloads
+drwx------@ 84 kfri.2.kfri3714  kfri.2.kfri3714  2688  8  3 19:12 Library
+drwx------   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 13:03 Movies
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:08 Music
+drwxr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 17:42 mystudy
+dr-xr-xr-x   3 kfri.2.kfri3714  kfri.2.kfri3714    96  8  3 19:12 OrbStack
+drwx------   2 kfri.2.kfri3714  kfri.2.kfri3714    64  8  4 16:57 permission-directory
+-rw-r--r--@  1 kfri.2.kfri3714  kfri.2.kfri3714     7  8  4 16:57 permission-file.sh
+drwx------+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:04 Pictures
+drwxr-xr-x+  4 kfri.2.kfri3714  kfri.2.kfri3714   128  8  3 13:03 Public
+-rw-r--r--   1 kfri.2.kfri3714  kfri.2.kfri3714     0  8  6 02:33 test1.txt
+kfri.2.kfri3714@c6r6s5 ~ % 
