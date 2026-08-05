@@ -1,0 +1,20 @@
+kfri.2.kfri3714@c6r6s5 Documents % docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+26c307b5e35a: Pull complete 
+3c55dc422a81: Pull complete 
+d84ae7b21412: Pull complete 
+c0df8d325117: Pull complete 
+b8b80b9bc028: Pull complete 
+f5de6e85ac74: Pull complete 
+5a4222b844e8: Pull complete 
+Digest: sha256:640dee81b9ada2bf929ae17c2c7e88930f244216aa6418306226ce9bdc3271e6
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+kfri.2.kfri3714@c6r6s5 Documents % docker images ls
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+kfri.2.kfri3714@c6r6s5 Documents % docker run --name webserver -d -p 80:80 nginx
+1d1b971f1732092f89951ac2b0869938dd0ca550b8a2420260079bb330322cbf
+kfri.2.kfri3714@c6r6s5 Documents % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED         STATUS         PORTS                                 NAMES
+1d1b971f1732   nginx     "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp, [::]:80->80/tcp   webserver

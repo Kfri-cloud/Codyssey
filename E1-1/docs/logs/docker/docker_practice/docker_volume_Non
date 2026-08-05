@@ -1,0 +1,97 @@
+fri.2.kfri3714@c6r6s5 Documents % docker run -e MYSQL_ROOT_PASSWORD=password123 -d -p 3306:3306 mysql
+6cb233e7f9d328033a3206589e93d73179a0429fc1eea59e8f9bfaf4aeda3caf
+kfri.2.kfri3714@c6r6s5 Documents % docker ps 
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS          PORTS                                                    NAMES
+6cb233e7f9d3   mysql     "docker-entrypoint.s…"   21 seconds ago   Up 21 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   nervous_diffie
+0e80b1732439   nginx     "/docker-entrypoint.…"   31 minutes ago   Up 31 minutes   80/tcp                   
+kfri.2.kfri3714@c6r6s5 Documents % docker exec -it 6 bash
+bash-5.1# ls
+afs  bin  boot  dev  docker-entrypoint-initdb.d  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+bash-5.1# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 26.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.008 sec)
+
+mysql> create database mydb;
+Query OK, 1 row affected (0.045 sec)
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.012 sec)
+mysql> exit
+Bye
+bash-5.1# exit  
+exit
+
+// 컨테이너 삭제후 mydb확인
+
+kfri.2.kfri3714@c6r6s5 Documents % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS          PORTS                                                    NAMES
+6cb233e7f9d3   mysql     "docker-entrypoint.s…"   12 minutes ago   Up 12 minutes   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   nervous_diffie
+0e80b1732439   nginx     "/docker-entrypoint.…"   44 minutes ago   Up 44 minutes   80/tcp                                                   happy_mclaren
+kfri.2.kfri3714@c6r6s5 Documents % docker rm -f 6
+6
+kfri.2.kfri3714@c6r6s5 Documents % docker run -e MYSQL_ROOT_PASSWORD=password123 -d -p 3306:3306 mysql
+a2ac3d7659d786bbde729128c3d3d57fb1a947b997ce1f58b7c60d48ac70bb25
+
+kfri.2.kfri3714@c6r6s5 Documents % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED              STATUS              PORTS                                                    NAMES
+a2ac3d7659d7   mysql     "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   musing_shirley
+0e80b1732439   nginx     "/docker-entrypoint.…"   46 minutes ago       Up 46 minutes       80/tcp                                                   happy_mclaren
+kfri.2.kfri3714@c6r6s5 Documents % docker exec -it a2a bash
+bash-5.1# mysqp -u root -p
+bash: mysqp: command not found
+bash-5.1# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 26.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.019 sec)
+

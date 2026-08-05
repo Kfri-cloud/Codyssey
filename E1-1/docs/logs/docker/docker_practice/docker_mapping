@@ -1,0 +1,5 @@
+kfri.2.kfri3714@c6r6s5 Documents % docker run -d -p 4000:80 nginx
+1d9dd2d30f4e0470db1de68be59ae9bfbccdbd98c5c408a7d29b0e3c18e50eab
+kfri.2.kfri3714@c6r6s5 Documents % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED         STATUS         PORTS                                     NAMES
+1d9dd2d30f4e   nginx     "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   0.0.0.0:4000->80/tcp, [::]:4000->80/tcp   hungry_allen

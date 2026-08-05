@@ -1,0 +1,32 @@
+kfri.2.kfri3714@c6r6s5 Documents % docker pull nginx:alpine
+alpine: Pulling from library/nginx
+55afa1ecc21d: Pull complete 
+3cd534fe98c6: Pull complete 
+1223f016b4e4: Pull complete 
+62bec68d7c31: Pull complete 
+46f977ee452f: Pull complete 
+d0008c891db4: Pull complete 
+390dc935348d: Pull complete 
+46519e7231d2: Pull complete 
+Digest: sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c1752
+Status: Downloaded newer image for nginx:alpine
+docker.io/library/nginx:alpine
+kfri.2.kfri3714@c6r6s5 Documents % docker image ls 
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+nginx        latest    5253dc86cc93   14 hours ago   161MB
+nginx        alpine    f0ba77f796e5   2 weeks ago    62.4MB
+kfri.2.kfri3714@c6r6s5 Documents % docker image rm f0ba
+Untagged: nginx:alpine
+Untagged: nginx@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c1752
+Deleted: sha256:f0ba77f796e57c6fa89ae7f4fdad1665d6fcbd8e3f211535120542b337f9959e
+Deleted: sha256:45af8252e701db8ae67cf1a0e607edb880442174e32ae01809d469550ede8dca
+Deleted: sha256:4437b59b997fac76d4317923c7cd472d35f8e2857ec505ae844a3fb9f6341cb1
+Deleted: sha256:2b0c309b0ef6ca16f4ea53f94f42e1e911c798887438485a12417a23fd34bd04
+Deleted: sha256:eba245424f8b9cd2cf401291b5caf3aed0add296b635ad076debdfa61c51904c
+Deleted: sha256:a5c4b3dbff409966964c760d05e6420e9be729d6ee20867f4954f0283d5f6839
+Deleted: sha256:a53f8fb1643c8b9dc230005ec04b0b0387df09c695e8694ba6697aced28713c7
+Deleted: sha256:7a6f39dd026ae9256ec67508c6605421ab81500c665e6293fdf474bdaaed1692
+Deleted: sha256:34884abbe92863fce933ed7c39c0e045631af0ed86d5cc0dfbdf9fdca426ce3c
+kfri.2.kfri3714@c6r6s5 Documents % docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+nginx        latest    5253dc86cc93   14 hours ago   161MB

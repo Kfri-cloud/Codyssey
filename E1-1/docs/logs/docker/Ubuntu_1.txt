@@ -1,0 +1,46 @@
+kfri.2.kfri3714@c6r6s5 Documents % docker run -dit --name ubuntu-practice00 ubuntu:24.04 bash
+067340500e7ea6829eafad6554f530f33a5131d141a3d59a3a94b5677552f3b3
+kfri.2.kfri3714@c6r6s5 Documents % docker ps --filter name=ubuntu-practice00
+CONTAINER ID   IMAGE          COMMAND   CREATED         STATUS         PORTS     NAMES
+067340500e7e   ubuntu:24.04   "bash"    2 minutes ago   Up 2 minutes             ubuntu-practice00
+kfri.2.kfri3714@c6r6s5 Documents % docker exec ubuntu-practice00 pwd
+/
+OCI runtime exec failed: exec failed: unable to start container process: exec: "ls-la": executable file not found in $PATH
+kfri.2.kfri3714@c6r6s5 Documents % docker exec ubuntu-practice00 ls -la /
+total 16
+drwxr-xr-x   1 root root   6 Aug  5 12:47 .
+drwxr-xr-x   1 root root   6 Aug  5 12:47 ..
+-rwxr-xr-x   1 root root   0 Aug  5 12:47 .dockerenv
+lrwxrwxrwx   1 root root   7 Apr 22  2024 bin -> usr/bin
+drwxr-xr-x   1 root root   0 Apr 22  2024 boot
+drwxr-xr-x   5 root root 340 Aug  5 12:47 dev
+drwxr-xr-x   1 root root  56 Aug  5 12:47 etc
+drwxr-xr-x   1 root root  12 Jul 30 14:27 home
+lrwxrwxrwx   1 root root   7 Apr 22  2024 lib -> usr/lib
+lrwxrwxrwx   1 root root   9 Apr 22  2024 lib64 -> usr/lib64
+drwxr-xr-x   1 root root   0 Jul 30 14:19 media
+drwxr-xr-x   1 root root   0 Jul 30 14:19 mnt
+drwxr-xr-x   1 root root   0 Jul 30 14:19 opt
+dr-xr-xr-x 226 root root   0 Aug  5 12:47 proc
+drwx------   1 root root  30 Jul 30 14:27 root
+drwxr-xr-x   1 root root  22 Jul 30 14:27 run
+lrwxrwxrwx   1 root root   8 Apr 22  2024 sbin -> usr/sbin
+drwxr-xr-x   1 root root   0 Jul 30 14:19 srv
+dr-xr-xr-x  11 root root   0 Aug  5 12:47 sys
+drwxrwxrwt   1 root root   0 Jul 30 14:27 tmp
+drwxr-xr-x   1 root root  10 Jul 30 14:19 usr
+drwxr-xr-x   1 root root  90 Jul 30 14:27 var
+kfri.2.kfri3714@c6r6s5 Documents % docker exec ubuntu-practice00 cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo

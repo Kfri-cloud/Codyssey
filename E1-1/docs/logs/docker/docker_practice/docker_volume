@@ -1,0 +1,96 @@
+kfri.2.kfri3714@c6r6s5 Documents % cd 
+kfri.2.kfri3714@c6r6s5 ~ % cd downloads/
+kfri.2.kfri3714@c6r6s5 downloads % mkdir doker
+kfri.2.kfri3714@c6r6s5 downloads % mkdir docker
+kfri.2.kfri3714@c6r6s5 downloads % cd docker
+
+//make volume
+kfri.2.kfri3714@c6r6s5 docker % docker run --name mysql-practice -e MYSQL_ROOT_PASSWORD=password123 -d -p 3306:3306 -v \
+> /Users/kfri.2.kfri3714/downloads/docker:/var/lib/mysql -d mysql
+0079c8e17796c382ad73d2f46da3eb1b116a90182ab816eab64eab0f8824e2da
+kfri.2.kfri3714@c6r6s5 docker % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS         PORTS                                                    NAMES
+0079c8e17796   mysql     "docker-entrypoint.s…"   12 seconds ago   Up 7 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   mysql-practice
+kfri.2.kfri3714@c6r6s5 docker % docker exec -it 00 bash
+bash-5.1# show databases;
+bash: show: command not found
+bash-5.1# show databases;
+bash: show: command not found
+bash-5.1# show databases;
+bash: show: command not found
+bash-5.1# mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 26.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.006 sec)
+
+mysql> create database mydb;
+Query OK, 1 row affected (0.034 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.001 sec)
+
+//before del
+
+kfri.2.kfri3714@c6r6s5 docker % docker run --name mysql-practice -e MYSQL_ROOT_PASSWORD=password123 -d -p 3306:3306 -v "$HOME/downloads/docker:/var/lib/mysql" mysql
+d95ebe3c8e5c1c8831d65245e7af00ba68415b7198a41980569ccbcc07449076
+kfri.2.kfri3714@c6r6s5 docker % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS          PORTS                                                    NAMES
+d95ebe3c8e5c   mysql     "docker-entrypoint.s…"   17 seconds ago   Up 17 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   mysql-practice
+kfri.2.kfri3714@c6r6s5 docker % docker exec -it d95 bash
+bash-5.1# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 26.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.006 sec)
+
+
+//password non-chage

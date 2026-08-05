@@ -1,0 +1,45 @@
+kfri.2.kfri3714@c6r6s5 Documents % docker run -d nginx
+0e80b1732439c24dbfedff4b0aa29445934635a6a8454780a6b7ca94a1684c4e
+kfri.2.kfri3714@c6r6s5 Documents % docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED         STATUS         PORTS     NAMES
+0e80b1732439   nginx     "/docker-entrypoint.…"   5 seconds ago   Up 5 seconds   80/tcp    happy_mclaren
+kfri.2.kfri3714@c6r6s5 Documents % docker exec -it 0e8 bash
+root@0e80b1732439:/# cd /etc/nginx
+root@0e80b1732439:/etc/nginx# ls
+conf.d  fastcgi_params  mime.types  modules  nginx.conf  scgi_params  uwsgi_params
+root@0e80b1732439:/etc/nginx# cat nginx,conf
+cat: nginx,conf: No such file or directory
+root@0e80b1732439:/etc/nginx# cat nginx.conf
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+root@0e80b1732439:/etc/nginx# 
