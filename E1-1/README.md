@@ -6,6 +6,14 @@
 
 터미널에서 파일과 디렉터리를 관리하고, macOS에서 OrbStack을 이용해 Docker 컨테이너를 실행했다. `hello-world`, Ubuntu, Nginx, MySQL 컨테이너를 직접 생성하고 이미지·컨테이너 조회, 로그 확인, 포트 매핑, 컨테이너 내부 접근, 삭제, 바인드 마운트에 따른 데이터 유지 여부를 검증했다.
 
+### 기존 실습 저장소에서 가져온 근거
+
+이 문서는 먼저 수행한 [개발 워크스테이션 실습 저장소](https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation)의 실제 명령 결과와 마스킹된 증거 자료를 함께 활용해 구성했다. 기존 자료에 실제 출력이 있는 항목만 완료 근거로 사용했으며, TODO로 남아 있거나 실행 출력이 없는 항목은 보완 필요 상태로 유지했다.
+
+- [기존 저장소의 hello-world 및 Docker 실습 커밋](https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation/commit/edcab3c7e44d7e23351cb370ab52962b9a85e68a)
+- [기존 저장소의 마스킹된 Docker 증거 커밋](https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation/commit/6b0a824432b57846478a82691d4a584b644ceca2)
+- [기존 저장소의 Git 설정 및 브랜치 복구 기록](https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation/commit/b558097e2aceeb6da5c276ffa6ebd7736ca266e7)
+
 ### 미션 목표
 
 - CLI로 파일과 디렉터리를 생성·복사·이동·삭제한다.
@@ -93,13 +101,13 @@ E1-1/
 |---|---|---|
 | 터미널 폴더·파일 생성·이동·삭제 | 완료 | 5번 실습 명령 및 이미지 02~05 |
 | 파일 및 디렉터리 권한 변경 | 보완 필요 | 개념과 실행 명령은 있으나 실제 `chmod` 출력 로그 미확인 |
-| Docker 버전 및 동작 상태 | 완료 | `docker --version`, `docker info`, 이미지 06~07 |
+| Docker 버전 및 동작 상태 | 보완 필요 | 버전과 이미지 증거는 있으나 `docker info` Server 전체 텍스트 로그 추가 필요 |
 | `hello-world` 실행 | 완료 | `Hello from Docker!`, `Exited (0)`, 이미지 08 |
 | 이미지·컨테이너 확인 및 정리 | 완료 | `image ls`, `ps -a`, `stop`, `rm`, `rm -f` 로그 |
 | Dockerfile 이미지 빌드 | 보완 필요 | `Dockerfile`과 `docker build` 결과 미확인 |
-| 포트 매핑 및 접속 | 완료 | `-p 4000:80` 적용 및 실행 상태 확인 |
-| 컨테이너 삭제 후 데이터 유지 | 완료 | 바인드 마운트 재연결 후 새 MySQL 컨테이너에서 `mydb` 확인 |
-| Git 설정 및 GitHub 연동 | 완료 | Git 설정·원격 저장소 이미지 11~12 |
+| 포트 매핑 및 접속 | 보완 필요 | `-p 4000:80` 매핑은 확인했으나 `curl` 또는 브라우저 접속 증거 추가 필요 |
+| 컨테이너 삭제 후 데이터 유지 | 보완 필요 | 재연결 후 `mydb`는 확인했으나 삭제 명령을 포함한 연속 로그 추가 필요 |
+| Git 설정 및 GitHub 연동 | 완료 | Git 설정·원격 저장소 이미지와 실제 원격 커밋 기록 |
 
 > 평가기준에 직접 포함된 권한 변경과 Dockerfile 빌드는 삭제하지 않고 보완 대상으로 남겼다. MySQL 데이터 영속성은 완료했지만, 사용한 방식은 Docker가 관리하는 이름 있는 볼륨이 아니라 호스트 디렉터리를 연결한 바인드 마운트다.
 
@@ -245,7 +253,7 @@ docker ps -a --filter name=hello-test
 
 ![개인정보를 가린 hello-world 결과](./docs/images/11-docker-hello-world-masked.png)
 
-- [hello-world 전체 로그](./docs/logs/docker/hellow-world)
+- [hello-world 전체 stdout 및 Exited (0) 로그](./docs/logs/docker/hello_world.txt)
 
 ---
 
@@ -384,6 +392,8 @@ docker ps
 
 - [포트 매핑 확인 로그](./docs/logs/docker/docker_practice/docker_mapping)
 
+> 현재 로그는 포트 매핑 상태까지만 증명한다. 실제 HTTP 접속 성공을 증명하려면 `curl -i http://localhost:4000`의 출력 또는 브라우저 화면을 추가해야 한다.
+
 ---
 
 ## 15. MySQL 데이터 영속성 확인(바인드 마운트)
@@ -413,7 +423,7 @@ docker run \
   mysql
 ```
 
-호스트의 `$HOME/downloads/docker` 폴더와 컨테이너의 `/var/lib/mysql`을 연결했다. 첫 번째 컨테이너에서 `mydb`를 생성한 뒤 컨테이너를 삭제하고, 같은 호스트 폴더를 연결한 새 MySQL 컨테이너를 실행했다. 새 컨테이너에서 `SHOW DATABASES;`를 실행했을 때 `mydb`가 다시 출력되어 데이터 영속성을 확인했다.
+호스트의 `$HOME/downloads/docker` 폴더와 컨테이너의 `/var/lib/mysql`을 연결했다. 첫 번째 컨테이너에서 `mydb`를 생성한 뒤 컨테이너를 삭제하고, 같은 호스트 폴더를 연결한 새 MySQL 컨테이너를 실행했다. 새 컨테이너에서 `SHOW DATABASES;`를 실행했을 때 `mydb`가 다시 출력되는 결과를 확인했다. 다만 기존 원본 기록에는 첫 번째 컨테이너 삭제 명령이 빠져 있으므로, 평가용 완전한 증거를 위해 삭제와 재생성을 연속으로 기록한 로그를 추가해야 한다.
 
 ```text
 첫 번째 컨테이너: mydb 생성
@@ -436,6 +446,13 @@ docker run \
 | 저장 위치 | 사용자가 지정한 호스트 경로 | Docker가 관리하는 영역 |
 | 경로 의존성 | 호스트 경로에 의존 | 상대적으로 낮음 |
 | 주요 용도 | 개발 소스·설정 파일 연결 | 데이터베이스·서비스 데이터 보존 |
+
+- **Bind Mount**: 컨테이너 밖에 있는 내 Mac의 특정 폴더 경로를 직접 지정하여 데이터를 남기는 방식
+- **Docker Volume**: 컨테이너 밖에 Docker가 관리하는 전용 저장 공간을 할당하여 데이터를 남기는 방식
+
+**참고 영상**
+
+- [Docker Bind Mount와 Volume 참고 영상](https://www.youtube.com/watch?v=OPmSQCfzl1Q&list=PLtUgHNmvcs6rS5aNCRIZtVcyk3gRX2iOd)
 
 현재 완료한 MySQL 실습은 바인드 마운트이다. 이름 있는 Docker 볼륨 실습은 다음 명령으로 추가 검증할 수 있다.
 
@@ -475,6 +492,8 @@ git remote -v
 ![Git 설정 확인](./docs/images/11-git-config.png)
 
 ![GitHub 원격 저장소 확인](./docs/images/12-github-remote.png)
+
+- [실제 GitHub push 및 원격 커밋 근거](./docs/logs/git/push_evidence.md)
 
 ---
 
@@ -576,7 +595,7 @@ docker rm -f <컨테이너_ID>
 
 또한 Nginx 컨테이너 내부에 접속해 설정 파일을 살펴보고, 로그 확인과 포트 매핑을 실습했다. MySQL 실습에서는 저장 공간을 연결하지 않으면 컨테이너 삭제 시 데이터가 사라지고, 호스트 디렉터리를 바인드 마운트하면 새 컨테이너에서도 데이터가 유지되는 차이를 확인했다.
 
-현재 실제 증거가 남아 있는 항목은 완료로 표시했다. 특히 MySQL 컨테이너를 재생성한 뒤에도 `mydb`가 남아 있어 바인드 마운트 기반 데이터 영속성이 검증됐다. Dockerfile을 이용한 커스텀 이미지 빌드, Docker가 관리하는 이름 있는 볼륨, 파일 권한 변경 결과는 별도 증거가 확인되면 보완한다.
+현재 실제 증거가 남아 있는 항목만 완료로 표시했다. `hello-world` 실행과 원격 GitHub 커밋은 별도 로그로 보강했다. MySQL 재연결 후 `mydb`가 조회된 결과는 있으나 삭제 명령을 포함한 연속 로그가 필요하며, 포트 매핑도 실제 HTTP 응답 증거를 추가해야 한다. Dockerfile 빌드, 이름 있는 볼륨, 파일 권한 변경 결과 역시 실제 실행 로그가 확인되면 완료 처리한다.
 
 
 ---
