@@ -393,7 +393,7 @@ docker ps
 컨테이너는 독립된 네트워크 환경에서 실행되므로 호스트에서 접근하려면 포트 연결이 필요하다.
 
 - [포트 매핑 확인 로그](./docs/logs/docker/docker_practice/docker_mapping)
-- [포트 매핑 확인 로그](./docs/images/conect)
+- [포트 매핑 확인 로그](./docs/images/conect.png)
 > 현재 로그는 포트 매핑 상태까지만 증명한다. 실제 HTTP 접속 성공을 증명하려면 `curl -i http://localhost:4000`의 출력 또는 브라우저 화면을 추가해야 한다.
 
 ---
