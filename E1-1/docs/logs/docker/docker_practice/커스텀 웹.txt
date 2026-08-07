@@ -1,0 +1,24 @@
+Last login: Fri Aug  7 18:44:36 on ttys002
+kfri.2.kfri3714@c6r6s5 ~ % docker run -d -p 8080:80 --name my_nginx nginx
+f0ab30208dc6061b8c4d02c90ed60d8abbdac1684b73ad3192479121b063e120
+kfri.2.kfri3714@c6r6s5 ~ % docker exec -it f0 bash
+root@f0ab30208dc6:/# echo hi ./index.html
+hi ./index.html
+root@f0ab30208dc6:/# echo "hi"> ./index.html
+root@f0ab30208dc6:/# echo "<h1>hi</h1>" > /usr/share/nginx/html/index.html
+root@f0ab30208dc6:/# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
