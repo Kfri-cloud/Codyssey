@@ -62,7 +62,7 @@ class QuizGame:
 
         print ("문제 새로 등록")
 
-    def show_quize_list(self):
+    def show_quiz_list(self):
         print("\n ======퀴즈목록========")
 
         if len(self.quizzes) ==0:
@@ -83,7 +83,7 @@ class QuizGame:
             accuracy =self.socre /self.solved_clount*100
             print(f"접답률 :{accuracy:.1f}%")
 
-    def shoow_menu(self):
+    def show_menu(self):
         print("\n"+"="*25)
         print("   밤하늘 별 퀴즈")
         print("=" * 25)
