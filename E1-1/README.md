@@ -75,7 +75,8 @@ E1-1/
     │   ├── 10-background-name-error.png
     │   ├── 11-docker-hello-world-masked.png
     │   ├── 11-git-config.png
-    │   └── 12-github-remote.png
+    │   ├── 12-github-remote.png
+    │   └── 커스텀.png
     └── logs/
         └── docker/
             ├── info.txt
@@ -89,6 +90,7 @@ E1-1/
                 ├── docker_logs
                 ├── docker_mapping
                 ├── docker_nginx.txt
+                ├── 커스텀 웹.txt
                 ├── docker_volume
                 └── docker_volume_Non
         └── git/
@@ -107,7 +109,7 @@ E1-1/
 | `hello-world` 실행 | 완료 | `Hello from Docker!`, `Exited (0)`, 이미지 08 |
 | 이미지·컨테이너 확인 및 정리 | 완료 | `image ls`, `ps -a`, `stop`, `rm`, `rm -f` 로그 |
 | Dockerfile 이미지 빌드 | 보완 필요 | `Dockerfile`과 `docker build` 결과 미확인 |
-| 포트 매핑 및 접속 | 보완 필요 | `-p 4000:80` 매핑은 확인했으나 `curl` 또는 브라우저 접속 증거 추가 필요 |
+| 포트 매핑 및 접속 | 완료 | `-p 8080:80` 실행 후 브라우저에서 수정한 Nginx 페이지 출력 확인 |
 | 컨테이너 삭제 후 데이터 유지 | 보완 필요 | 재연결 후 `mydb`는 확인했으나 삭제 명령을 포함한 연속 로그 추가 필요 |
 | Git 설정 및 GitHub 연동 | 완료 | Git 설정·원격 저장소 이미지와 실제 원격 커밋 기록 |
 
@@ -355,6 +357,24 @@ cat nginx.conf
 - [Nginx 내부 접근 로그](./docs/logs/docker/docker_practice/docker_exec%20-it)
 - [Nginx 실행 로그](./docs/logs/docker/docker_practice/docker_nginx.txt)
 
+### 12.1 Nginx 기본 페이지 직접 수정
+
+호스트의 8080번 포트를 Nginx 컨테이너의 80번 포트에 연결하고, 실행 중인 컨테이너 내부에서 기본 HTML 파일을 수정했다.
+
+```bash
+docker run -d -p 8080:80 --name my_nginx nginx
+docker exec -it my_nginx bash
+echo "<h1>hi</h1>" > /usr/share/nginx/html/index.html
+```
+
+`echo hi ./index.html`은 화면에 문자열만 출력하며 파일을 수정하지 않는다. 파일에 내용을 저장하려면 `>` 리다이렉션과 Nginx가 실제로 제공하는 경로인 `/usr/share/nginx/html/index.html`을 사용해야 한다.
+
+브라우저에서 `http://localhost:8080`에 접속해 수정한 `hi` 문구가 표시되는 것을 확인했다.
+
+![Nginx 커스텀 웹페이지 출력](./docs/images/커스텀.png)
+
+- [Nginx 커스텀 웹페이지 실습 로그](./docs/logs/docker/docker_practice/커스텀%20웹.txt)
+
 ---
 
 ## 13. Docker 로그 확인
@@ -380,21 +400,22 @@ docker logs --tail 0 -f <컨테이너_ID>
 ## 14. 포트 매핑
 
 ```bash
-docker run -d -p 4000:80 nginx
+docker run -d -p 8080:80 --name my_nginx nginx
 docker ps
 ```
 
-`-p 4000:80`은 호스트의 4000번 포트를 컨테이너의 80번 포트에 연결한다.
+`-p 8080:80`은 호스트의 8080번 포트를 컨테이너의 80번 포트에 연결한다.
 
 ```text
-브라우저 또는 호스트 :4000 → 컨테이너 Nginx :80
+브라우저 또는 호스트 :8080 → 컨테이너 Nginx :80
 ```
 
-컨테이너는 독립된 네트워크 환경에서 실행되므로 호스트에서 접근하려면 포트 연결이 필요하다.
+컨테이너는 독립된 네트워크 환경에서 실행되므로 호스트에서 접근하려면 포트 연결이 필요하다. 이번 실습에서는 브라우저로 `http://localhost:8080`에 접속해 컨테이너 내부에서 수정한 HTML이 실제로 표시되는 것을 확인했다.
 
-- [포트 매핑 확인 로그](./docs/logs/docker/docker_practice/docker_mapping)
-- [포트 매핑 확인 로그](./docs/images/conect.png)
-> 현재 로그는 포트 매핑 상태까지만 증명한다. 실제 HTTP 접속 성공을 증명하려면 `curl -i http://localhost:4000`의 출력 또는 브라우저 화면을 추가해야 한다.
+- [기존 포트 매핑 확인 로그](./docs/logs/docker/docker_practice/docker_mapping)
+- [기존 포트 매핑 화면](./docs/images/conect.png)
+- [Nginx 커스텀 웹페이지 실습 로그](./docs/logs/docker/docker_practice/커스텀%20웹.txt)
+- [Nginx 커스텀 웹페이지 접속 결과](./docs/images/커스텀.png)
 
 ---
 
@@ -597,7 +618,7 @@ docker rm -f <컨테이너_ID>
 
 또한 Nginx 컨테이너 내부에 접속해 설정 파일을 살펴보고, 로그 확인과 포트 매핑을 실습했다. MySQL 실습에서는 저장 공간을 연결하지 않으면 컨테이너 삭제 시 데이터가 사라지고, 호스트 디렉터리를 바인드 마운트하면 새 컨테이너에서도 데이터가 유지되는 차이를 확인했다.
 
-현재 실제 증거가 남아 있는 항목만 완료로 표시했다. `hello-world` 실행과 원격 GitHub 커밋은 별도 로그로 보강했다. MySQL 재연결 후 `mydb`가 조회된 결과는 있으나 삭제 명령을 포함한 연속 로그가 필요하며, 포트 매핑도 실제 HTTP 응답 증거를 추가해야 한다. Dockerfile 빌드, 이름 있는 볼륨, 파일 권한 변경 결과 역시 실제 실행 로그가 확인되면 완료 처리한다.
+현재 실제 증거가 남아 있는 항목만 완료로 표시했다. `hello-world` 실행과 원격 GitHub 커밋은 별도 로그로 보강했다. Nginx는 `8080:80` 포트 매핑 후 컨테이너 내부의 기본 HTML을 수정하고 브라우저 출력까지 확인했다. MySQL 재연결 후 `mydb`가 조회된 결과는 있으나 삭제 명령을 포함한 연속 로그가 필요하다. Dockerfile 빌드, 이름 있는 볼륨, 파일 권한 변경 결과 역시 실제 실행 로그가 확인되면 완료 처리한다.
 
 
 ---
