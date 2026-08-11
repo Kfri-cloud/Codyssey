@@ -1,615 +1,340 @@
-// ...existing code...
-
 # Python과 Git 개념 북
+
+이 문서는 콘솔 퀴즈 게임을 만들기 전에 알아야 할 Python과 Git의 핵심 개념을 정리한다. 각 개념은 실제 프로젝트에서 어떻게 사용하는지 퀴즈 게임 예시와 함께 설명한다.
 
 ## 1. Python 기초
 
-### 1-1. 변수(Variable)란?
+### 1-1. 변수
 
-변수는 데이터를 저장하는 이름 붙은 공간입니다. 프로그램은 변수를 사용해서 값을 기억하고, 계산하고, 출력할 수 있습니다.
-
-예시:
+변수는 프로그램이 사용할 값에 이름을 붙여 저장하는 공간이다. 저장된 값을 다시 사용하거나 변경할 수 있으므로 입력값, 점수, 게임 상태 등을 관리할 때 필요하다.
 
 ```python
-name = "철수"
-age = 20
-is_student = True
+quiz_title = "별자리 퀴즈"
+score = 0
+is_running = True
 ```
 
-- `name`은 문자열 값을 저장합니다.
-- `age`는 정수 값을 저장합니다.
-- `is_student`는 참/거짓 값을 저장합니다.
-
-변수를 사용하는 이유:
-
-- 값을 재사용할 수 있다.
-- 코드를 더 이해하기 쉽게 만든다.
-- 사용자 입력, 계산 결과, 상태값 등을 저장할 수 있다.
-
----
+- `quiz_title`: 게임 제목을 저장한다.
+- `score`: 현재 점수를 저장한다.
+- `is_running`: 게임 실행 여부를 저장한다.
 
 ### 1-2. 기본 자료형
 
-Python은 여러 자료형을 가지고 있으며, 각각 다른 종류의 데이터를 저장합니다.
-
-#### 1) int: 정수
-
-정수는 소수점이 없는 숫자입니다.
-
-```python
-score = 100
-count = 5
-```
-
-#### 2) str: 문자열
-
-문자열은 텍스트 데이터를 의미합니다.
+| 자료형 | 의미 | 퀴즈 게임 사용 예시 |
+|---|---|---|
+| `int` | 정수 | 점수, 정답 번호, 메뉴 번호 |
+| `str` | 문자열 | 문제, 선택지, 안내 메시지 |
+| `bool` | 참 또는 거짓 | 정답 여부, 실행 여부 |
+| `list` | 여러 값을 순서대로 저장 | 선택지 목록, 퀴즈 목록 |
+| `dict` | 키와 값의 쌍으로 저장 | JSON으로 변환할 퀴즈 데이터 |
 
 ```python
-message = "안녕하세요"
-name = "민지"
-```
-
-문자열은 연결, 길이 확인, 자르기 등이 가능합니다.
-
-```python
-print(message + "!")
-print(len(name))
-```
-
-#### 3) bool: 불리언
-
-불리언은 참(`True`) 또는 거짓(`False`)을 표현합니다.
-
-```python
-is_active = True
-is_logged_in = False
-```
-
-불리언은 조건문에서 매우 자주 사용됩니다.
-
-#### 4) list: 리스트
-
-리스트는 여러 값을 순서대로 저장하는 자료형입니다.
-
-```python
-numbers = [1, 2, 3, 4]
-fruits = ["사과", "바나나", "오렌지"]
-```
-
-리스트는 값 추가, 삭제, 변경이 가능합니다.
-
-```python
-numbers.append(5)
-print(numbers)
-```
-
-#### 5) dict: 딕셔너리
-
-딕셔너리는 key와 value 쌍으로 데이터를 저장합니다.
-
-```python
-student = {
-    "name": "철수",
-    "age": 20,
-    "grade": "A"
+score = 3
+question = "사자자리의 영어 이름은?"
+is_correct = True
+choices = ["Leo", "Gemini", "Pisces", "Aries"]
+quiz_data = {
+    "question": question,
+    "choices": choices,
+    "answer": 1,
 }
 ```
 
-딕셔너리는 이름으로 값을 찾는 데 매우 적합합니다.
+`list`는 같은 성격의 여러 값을 순서대로 다룰 때 적합하고, `dict`는 `question`, `choices`, `answer`처럼 각 값의 의미를 이름으로 구분할 때 적합하다.
+
+### 1-3. 조건문: if / elif / else
+
+조건문은 조건에 따라 다른 코드를 실행한다. 퀴즈 게임에서는 메뉴 선택, 정답 판정, 최고 점수 갱신에 사용한다.
 
 ```python
-print(student["name"])
-```
-
----
-
-### 1-3. int, str, bool, list, dict 차이
-
-자료형을 이해할 때 중요한 것은 “어떤 종류의 데이터를 저장하는지”입니다.
-
-- `int`: 정수, 숫자
-- `str`: 문자열, 텍스트
-- `bool`: True/False
-- `list`: 여러 값을 순서대로 저장
-- `dict`: 이름(key)과 값(value) 쌍으로 저장
-
-예시:
-
-- 학생의 나이: `int`
-- 학생의 이름: `str`
-- 출석 여부: `bool`
-- 수강 과목 목록: `list`
-- 학생 전체 정보: `dict`
-
----
-
-### 1-4. 조건문: if / elif / else
-
-조건문은 특정 조건에 따라 다른 동작을 실행하도록 합니다.
-
-```python
-score = 85
-
-if score >= 90:
-    print("우수")
-elif score >= 70:
-    print("보통")
+if selected_answer == quiz.answer:
+    print("정답입니다!")
+    score += 1
 else:
-    print("노력 필요")
+    print("오답입니다.")
 ```
-
-- `if`: 조건이 참이면 실행
-- `elif`: 앞 조건이 거짓일 때 추가 조건 검사
-- `else`: 앞의 모든 조건이 거짓일 때 실행
-
-조건문은 프로그램에서 매우 중요합니다. 예를 들어 로그인 여부, 점수 판정, 재고 확인 등에 사용됩니다.
-
----
-
-### 1-5. 반복문: for와 while
-
-#### for 문
-
-`for`는 정해진 범위나 목록을 순회할 때 사용합니다.
 
 ```python
-for i in range(3):
-    print(i)
+if menu == 1:
+    game.play()
+elif menu == 2:
+    game.add_quiz()
+else:
+    print("지원하지 않는 메뉴입니다.")
 ```
 
-출력:
+### 1-4. 반복문: for와 while
+
+`for`는 목록처럼 반복할 대상이 있을 때 사용한다. 저장된 퀴즈를 한 문제씩 출제할 때 적합하다.
 
 ```python
-0
-1
-2
+for quiz in quizzes:
+    quiz.display()
 ```
 
-또는 리스트 순회:
+`while`은 특정 조건이 참인 동안 반복한다. 종료 메뉴를 선택하기 전까지 메뉴를 계속 출력하거나 올바른 입력을 받을 때까지 재입력받는 데 적합하다.
 
 ```python
-fruits = ["사과", "바나나", "딸기"]
-for fruit in fruits:
-    print(fruit)
+while is_running:
+    show_menu()
+    menu = input("메뉴를 선택하세요: ")
 ```
 
-#### while 문
+정리하면 다음과 같다.
 
-`while`은 조건이 참인 동안 반복합니다.
+- `for`: 퀴즈 목록처럼 정해진 대상을 순회할 때 사용한다.
+- `while`: 종료 여부나 입력 성공 여부처럼 조건에 따라 반복할 때 사용한다.
+
+### 1-5. 함수, 매개변수와 반환값
+
+함수는 하나의 작업을 수행하는 코드 묶음이다. 반복되는 로직을 재사용하고 기능별로 코드를 나누기 위해 사용한다.
 
 ```python
-count = 0
-while count < 3:
-    print(count)
-    count += 1
+def is_valid_answer(answer: int, choice_count: int) -> bool:
+    return 1 <= answer <= choice_count
 ```
 
-차이점:
+- `answer`, `choice_count`: 함수가 전달받는 매개변수이다.
+- `bool`: 반환값의 자료형이다.
+- `return`: 계산 결과를 호출한 곳으로 돌려준다.
 
-- `for`: 반복 횟수가 정해져 있거나 목록을 순회할 때 적합
-- `while`: 조건이 중요하고 계속 실행 여부를 결정할 때 적합
-
----
-
-### 1-6. 함수(Function)
-
-함수는 특정 작업을 수행하는 코드 블록입니다. 같은 코드를 반복해서 작성하지 않고 재사용할 수 있게 해줍니다.
-
-```python
-def add(a, b):
-    return a + b
-
-result = add(3, 5)
-print(result)
-```
-
-- `a`, `b`는 매개변수(parameter)
-- `return`은 결과를 함수 밖으로 반환
-- 함수는 여러 번 호출할 수 있음
-
-함수의 장점:
-
-- 코드를 재사용할 수 있다.
-- 논리를 구조적으로 나눌 수 있다.
-- 큰 프로그램을 관리하기 쉬워진다.
-
----
+입력, 검증, 출력, 저장을 각각 함수나 메서드로 분리하면 코드를 이해하고 테스트하기 쉬워진다.
 
 ## 2. 클래스와 객체
 
-### 2-1. 클래스(Class)란?
+### 2-1. 클래스와 객체
 
-클래스는 객체를 만들기 위한 설계도입니다. 같은 종류의 데이터를 묶고, 그에 맞는 동작을 정의할 때 사용합니다.
-
-예시:
+클래스는 관련된 데이터와 동작을 하나로 묶는 설계도이고, 객체는 클래스로 만든 실제 값이다. 이 프로젝트에서는 문제 한 개를 `Quiz` 클래스로 표현한다.
 
 ```python
-class Student:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+class Quiz:
+    def __init__(self, question: str, choices: list[str], answer: int):
+        self.question = question
+        self.choices = choices
+        self.answer = answer
 
-    def introduce(self):
-        print(f"안녕하세요, 제 이름은 {self.name}이고, 나이는 {self.age}살입니다.")
+    def is_correct(self, selected_answer: int) -> bool:
+        return selected_answer == self.answer
 ```
 
-클래스를 사용하는 이유:
-
-- 관련된 데이터를 한 곳에 묶을 수 있다.
-- 코드 구조를 더 깔끔하게 관리할 수 있다.
-- 현실 세계의 개념을 모델링하기 좋다.
-
----
-
-### 2-2. 객체(Object)란?
-
-객체는 클래스에서 만들어진 실제 인스턴스입니다.
-
 ```python
-student1 = Student("민수", 20)
-student1.introduce()
+quiz = Quiz(
+    "사자자리의 영어 이름은?",
+    ["Leo", "Gemini", "Pisces", "Aries"],
+    1,
+)
 ```
 
-`student1`은 `Student` 클래스의 객체입니다.
+여기서 `quiz`는 `Quiz` 클래스의 인스턴스, 즉 객체이다.
 
----
+### 2-2. `__init__`과 `self`
 
-### 2-3. __init__ 메서드와 self
-
-`__init__` 메서드는 객체가 생성될 때 자동으로 실행됩니다. 객체의 속성을 초기화하는 역할을 합니다.
+`__init__`은 객체가 생성될 때 자동으로 호출되어 객체의 초기 상태를 만든다. `self`는 현재 메서드를 실행하고 있는 객체 자신을 뜻한다.
 
 ```python
-class Student:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+self.question = question
 ```
 
-여기서:
+이 코드는 매개변수로 받은 `question`을 현재 퀴즈 객체의 `question` 속성에 저장한다. 각 객체는 자신의 `self.question` 값을 따로 가진다.
 
-- `self`는 현재 객체 자신을 의미
-- `self.name = name`은 객체의 이름 속성을 저장
-- `self.age = age`는 객체의 나이 속성을 저장
+### 2-3. 속성과 메서드
 
-`self`는 객체마다 다른 데이터를 관리할 수 있게 합니다.
+- 속성(attribute): 객체가 보관하는 데이터이다.
+- 메서드(method): 객체가 수행하는 동작이다.
 
----
+`Quiz` 객체의 속성은 `question`, `choices`, `answer`이고, 메서드는 문제 출력과 정답 확인 등이 될 수 있다. `QuizGame` 객체는 퀴즈 목록과 최고 점수를 속성으로 가지며, 게임 실행·퀴즈 추가·목록 출력 등을 메서드로 가진다.
 
-### 2-4. 속성(Attribute)과 메서드(Method)
+### 2-4. 클래스를 사용하는 이유
 
-클래스에는 두 가지 중요한 구성 요소가 있습니다.
+- 문제 데이터와 문제에 관련된 동작을 한곳에 묶을 수 있다.
+- 여러 문제를 같은 형식으로 생성할 수 있다.
+- 게임 진행과 파일 저장 등 서로 다른 책임을 분리할 수 있다.
+- 기능을 수정하거나 테스트할 범위가 명확해진다.
 
-#### 속성(Attribute)
+## 3. 파일 입출력과 JSON
 
-속성은 객체가 가지고 있는 데이터입니다.
+### 3-1. 파일 읽기와 쓰기
 
-```python
-self.name
-self.age
-```
-
-#### 메서드(Method)
-
-메서드는 객체가 수행할 수 있는 행동입니다.
+`with open(...)`을 사용하면 작업이 끝난 뒤 파일이 자동으로 닫힌다. 한글이 깨지지 않도록 `encoding="utf-8"`을 지정한다.
 
 ```python
-def introduce(self):
-    print("학생 소개")
-```
-
-예를 들어 학생 객체는:
-
-- 속성: 이름, 나이, 학년
-- 메서드: 소개하기, 점수 계산하기
-
-이런 식으로 클래스는 데이터를 다루는 구조를 만듭니다.
-
----
-
-## 3. 파일 입출력
-
-### 3-1. 파일을 열고, 읽고, 쓰는 기본 과정
-
-#### 파일 쓰기
-
-```python
-with open("example.txt", "w", encoding="utf-8") as file:
-    file.write("hello world")
-```
-
-- `"w"`: 쓰기 모드
-- 파일이 없으면 생성됨
-
-#### 파일 읽기
-
-```python
-with open("example.txt", "r", encoding="utf-8") as file:
+with open("state.json", "r", encoding="utf-8") as file:
     content = file.read()
-    print(content)
 ```
-
-- `"r"`: 읽기 모드
-- 파일 내용을 문자열로 읽어옴
-
-#### 파일에 이어쓰기
 
 ```python
-with open("example.txt", "a", encoding="utf-8") as file:
-    file.write("\n추가 내용")
+with open("state.json", "w", encoding="utf-8") as file:
+    file.write(content)
 ```
 
-- `"a"`: 이어쓰기 모드
+파일 모드는 다음과 같다.
 
-`with`를 사용하면 파일이 자동으로 닫히므로 안전합니다.
+- `"r"`: 읽기
+- `"w"`: 새로 쓰기. 기존 내용이 있으면 덮어쓴다.
+- `"a"`: 기존 내용 뒤에 이어 쓰기
 
----
+### 3-2. JSON
 
-### 3-2. JSON이란?
-
-JSON은 JavaScript Object Notation의 약자이며, 데이터를 구조적으로 저장하는 표준 형식입니다.
-
-예시:
+JSON은 데이터를 키와 값의 구조로 저장하는 형식이다. 사람이 읽기 쉽고 Python의 `dict`, `list`와 변환하기 쉬워 퀴즈와 최고 점수를 저장하기에 적합하다.
 
 ```json
 {
-  "name": "철수",
-  "age": 20,
-  "grade": "A"
+  "quizzes": [
+    {
+      "question": "사자자리의 영어 이름은?",
+      "choices": ["Leo", "Gemini", "Pisces", "Aries"],
+      "answer": 1
+    }
+  ],
+  "best_score": null
 }
 ```
 
-Python에서는 `json` 모듈을 사용합니다.
+Python에서는 표준 라이브러리인 `json` 모듈을 사용한다.
 
 ```python
 import json
 
-student = {
-    "name": "철수",
-    "age": 20,
-    "grade": "A"
-}
+with open("state.json", "w", encoding="utf-8") as file:
+    json.dump(data, file, ensure_ascii=False, indent=2)
 
-with open("student.json", "w", encoding="utf-8") as file:
-    json.dump(student, file, ensure_ascii=False)
-```
-
-JSON을 읽는 예시:
-
-```python
-with open("student.json", "r", encoding="utf-8") as file:
+with open("state.json", "r", encoding="utf-8") as file:
     data = json.load(file)
-    print(data)
 ```
 
-왜 JSON을 사용할까?
+- `ensure_ascii=False`: 한글을 그대로 저장한다.
+- `indent=2`: 사람이 읽기 쉽게 들여쓰기한다.
 
-- 사람도 읽기 쉽다.
-- Python에서 처리하기 쉽다.
-- 웹, 서버, 앱 데이터 교환에 자주 사용된다.
+### 3-3. 예외 처리: try / except
 
----
-
-### 3-3. try / except로 오류 처리하기
-
-프로그램은 예외 상황이 발생할 수 있습니다. 예를 들어 숫자로 변환할 수 없는 문자열이 들어오면 문제가 생길 수 있습니다.
+예외 처리는 잘못된 입력이나 파일 오류가 발생해도 프로그램이 비정상 종료되지 않게 한다.
 
 ```python
 try:
-    number = int("abc")
+    selected_answer = int(input("정답 번호: ").strip())
 except ValueError:
-    print("숫자로 변환할 수 없는 값입니다.")
+    print("숫자를 입력해 주세요.")
 ```
 
-`try/except`는 오류가 발생해도 프로그램이 강제로 종료되지 않도록 처리합니다.
+파일을 불러올 때는 상황별 예외를 구분한다.
 
-오류 처리의 중요성:
+```python
+import json
 
-- 사용자 입력이 잘못되더라도 프로그램이 죽지 않는다.
-- 파일이 없거나 형식이 잘못돼도 안전하게 처리할 수 있다.
-- 프로그램을 더 안정적으로 만들 수 있다.
+try:
+    with open("state.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+except FileNotFoundError:
+    print("저장 파일이 없어 기본 퀴즈를 사용합니다.")
+except (json.JSONDecodeError, OSError):
+    print("저장 파일을 읽을 수 없어 기본 퀴즈로 복구합니다.")
+```
 
----
+프로그램 전체에서는 `KeyboardInterrupt`와 `EOFError`도 처리하여 `Ctrl+C`나 입력 스트림 종료가 발생했을 때 안내 메시지를 출력하고 안전하게 종료한다.
 
-## 4. Git 기초
+## 4. 입력 검증
 
-### 4-1. Git이란?
+사용자 입력은 그대로 신뢰하면 안 된다. 이 프로젝트에서는 다음 순서로 검증한다.
 
-Git은 파일의 변경 이력을 관리하는 버전 관리 도구입니다. 여러 사람이 같은 프로젝트를 함께 작업할 때 매우 중요합니다.
+1. `strip()`으로 앞뒤 공백을 제거한다.
+2. 빈 문자열인지 확인한다.
+3. 숫자가 필요한 입력은 `int()`로 변환한다.
+4. 메뉴 번호나 정답 번호가 허용 범위에 있는지 확인한다.
+5. 잘못된 경우 안내 메시지를 보여주고 다시 입력받는다.
 
-Git의 목적:
+```python
+def read_number(prompt: str, minimum: int, maximum: int) -> int:
+    while True:
+        raw_value = input(prompt).strip()
 
-- 변경 기록을 남긴다.
-- 이전 상태로 되돌릴 수 있다.
-- 팀 협업을 쉽게 만든다.
-- 브랜치로 기능별 개발을 진행할 수 있다.
+        if not raw_value:
+            print("값을 입력해 주세요.")
+            continue
 
----
+        try:
+            value = int(raw_value)
+        except ValueError:
+            print("숫자를 입력해 주세요.")
+            continue
 
-### 4-2. 주요 Git 명령어
+        if minimum <= value <= maximum:
+            return value
 
-#### git init
+        print(f"{minimum}부터 {maximum} 사이의 숫자를 입력해 주세요.")
+```
 
-현재 폴더를 Git 저장소로 초기화합니다.
+공통 입력 함수를 사용하면 메뉴, 정답, 퀴즈 등록 입력에 같은 검증 규칙을 적용할 수 있다.
+
+## 5. Git 기초
+
+### 5-1. Git을 사용하는 이유
+
+Git은 파일의 변경 이력을 기록하는 버전 관리 도구이다. 이전 상태를 확인하거나 되돌릴 수 있고, 브랜치를 이용해 기능별로 안전하게 작업할 수 있다.
+
+### 5-2. 주요 명령어
+
+| 명령어 | 역할 |
+|---|---|
+| `git init` | 현재 디렉터리를 Git 저장소로 만든다. |
+| `git add` | 커밋할 변경 내용을 스테이징한다. |
+| `git commit` | 스테이징한 변경 내용을 이력으로 기록한다. |
+| `git push` | 로컬 커밋을 원격 저장소에 업로드한다. |
+| `git pull` | 원격 저장소의 변경 내용을 가져와 현재 브랜치에 반영한다. |
+| `git checkout` | 브랜치를 이동하거나 파일의 특정 상태를 가져온다. |
+| `git clone` | 원격 저장소를 새로운 로컬 디렉터리로 복제한다. |
 
 ```bash
-git init
+git clone https://github.com/user/star-quiz-game.git
+git checkout -b feature/quiz-play
+git add .
+git commit -m "feat: 퀴즈 풀이 기능 추가"
+git push origin feature/quiz-play
 ```
 
-#### git add
+### 5-3. 브랜치와 병합
 
-변경된 파일을 스테이징 영역에 올립니다.
-
-```bash
-git add file.py
-```
-
-#### git commit
-
-스테이징된 변화를 저장합니다.
-
-```bash
-git commit -m "초기 커밋"
-```
-
-#### git push
-
-로컬 저장소에 있는 변경 사항을 원격 저장소에 업로드합니다.
-
-```bash
-git push origin main
-```
-
-#### git pull
-
-원격 저장소의 최신 변경 사항을 로컬로 가져옵니다.
-
-```bash
-git pull origin main
-```
-
-#### git checkout
-
-브랜치 이동이나 특정 상태 복원을 할 때 사용합니다.
-
-```bash
-git checkout feature-branch
-```
-
-#### git clone
-
-원격 저장소를 로컬 컴퓨터에 복사합니다.
-
-```bash
-git clone https://github.com/user/repo.git
-```
-
----
-
-### 4-3. 브랜치와 병합
-
-브랜치는 프로젝트를 여러 갈래로 나누어 개발할 수 있게 해줍니다. 보통 기능 개발이나 수정 작업을 별도 브랜치에서 진행하고, 완료 후 메인 브랜치에 합칩니다.
-
-브랜치 생성:
-
-```bash
-git branch feature-login
-```
-
-브랜치 이동:
-
-```bash
-git checkout feature-login
-```
-
-병합:
+브랜치는 기존 코드에 영향을 적게 주면서 기능을 따로 개발하기 위한 작업 공간이다. 기능 구현이 끝나면 해당 브랜치를 `main`에 병합한다.
 
 ```bash
 git checkout main
-git merge feature-login
+git merge feature/quiz-play
 ```
 
-브랜치는 협업 시 매우 중요합니다. 여러 사람이 동시에 작업하더라도 기능별로 나누어 개발할 수 있습니다.
+이 프로젝트에서는 미션 요구사항에 따라 최소 한 번 이상 별도 브랜치를 만들고 병합 기록을 남긴다.
 
-----
- 
-### 4-4. 커밋 규칙 (Commit Rules)
+### 5-4. 커밋 규칙
 
-커밋은 단순히 코드를 저장하는 것이 아니라, 어떤 변경을 왜 했는지를 기록하는 작업입니다. 좋은 커밋 규칙을 지키면 협업과 추적이 쉬워집니다.
+커밋은 하나의 목적을 가진 작은 단위로 작성한다. 메시지에는 무엇을 변경했는지 명확하게 기록한다.
 
-#### 1) 커밋은 의미 단위로 하기
-하나의 커밋에는 하나의 목적만 담는 것이 좋습니다.
-
-좋은 예:
-- 기능 추가
-- 버그 수정
-- 문서 수정
-- 스타일 정리
-
-나쁜 예:
-- 기능 추가 + 문서 수정 + 주석 삭제를 한 번에 넣기
-
-#### 2) 커밋 메시지는 명확하게 작성하기
-커밋 메시지는 “무엇을 변경했는지”가 보여야 합니다.
-
-권장 형식:
-
-```bash
-git commit -m "feat: 로그인 기능 추가"
-git commit -m "fix: 사용자 입력 검증 오류 수정"
-git commit -m "docs: README 내용 보완"
+```text
+feat: Quiz 클래스와 기본 문제 추가
+feat: 퀴즈 풀이 기능 추가
+feat: 퀴즈 등록과 목록 기능 추가
+feat: 최고 점수 저장 기능 추가
+fix: 숫자가 아닌 입력의 예외 처리
+docs: 실행 방법과 데이터 구조 설명
 ```
 
-- `feat`: 새로운 기능 추가
-- `fix`: 버그 수정
-- `docs`: 문서 작업
-- `refactor`: 코드 구조 개선
-- `style`: 포맷팅, 코드 스타일 수정
-- `test`: 테스트 추가/수정
+대표적인 접두어는 다음과 같다.
 
-#### 3) 커밋 전 확인 사항
-커밋하기 전에 다음을 확인하는 습관을 들이세요.
+- `feat`: 기능 추가
+- `fix`: 오류 수정
+- `docs`: 문서 수정
+- `refactor`: 동작을 유지하면서 구조 개선
+- `test`: 테스트 추가 또는 수정
+- `style`: 코드 동작과 무관한 형식 수정
 
-- 변경 내용이 의도한 것인지 확인
-- 불필요한 파일이 포함되지 않았는지 확인
-- 오타나 디버깅 코드가 남아있지 않은지 확인
-- 실행해 보고 테스트가 필요한 경우 확인
+커밋 전에는 `git status`와 `git diff`로 변경 범위, 불필요한 파일, 디버깅 코드와 민감한 정보가 포함되지 않았는지 확인한다.
 
-예시:
+## 6. 프로젝트 적용 요약
 
-```bash
-git status
-git diff
-```
-
-#### 4) 작은 단위로 자주 커밋하기
-큰 변경을 한 번에 올리면 나중에 원인을 찾기 어렵습니다. 기능 단위나 작업 단위로 나누어 커밋하는 것이 좋습니다.
-
-예시:
-- 로그인 화면 UI 추가
-- 로그인 로직 구현
-- 에러 메시지 처리
-
-이렇게 나누면 문제가 생겼을 때 어디를 수정해야 하는지 쉽게 찾을 수 있습니다.
-
-#### 5) 커밋 메시지는 너무 길지 않게
-커밋 메시지는 한 줄로 간단하게 작성하는 것이 좋습니다. 자세한 내용은 필요하면 PR 설명이나 문서에 적으면 됩니다.
-
-좋은 예:
-
-```bash
-git commit -m "feat: 사용자 회원가입 기능 추가"
-```
-
-나쁜 예:
-
-```bash
-git commit -m "오늘 이것저것 수정했다"
-```
-
-#### 6) 브랜치별로 작업하고 병합하기
-기능 개발은 메인 브랜치에 직접 수정하기보다 별도 브랜치를 만들어 작업하는 것이 안전합니다.
-
-예시:
-
-```bash
-git checkout -b feature/login
-# 작업 수행
-git add .
-git commit -m "feat: 로그인 기능 추가"
-git push origin feature/login
-```
-
-작업이 끝나면 메인 브랜치에 병합합니다.
-
-#### 7) 커밋 규칙의 핵심
-좋은 커밋은 다음 조건을 만족해야 합니다.
-
-- 한 번에 하나의 목적만 다룬다.
-- 어떤 변경인지 이해할 수 있다.
-- 다른 사람이 내용을 빠르게 파악할 수 있다.
-- 나중에 되돌리기 쉬운 단위로 나뉜다.
-
-즉, 커밋은 “기록”이며 “협업의 도구”입니다. 단순 저장이 아니라 프로젝트를 이해하기 위한 설명서 역할을 합니다.
-
----
+| 학습 개념 | 프로젝트 적용 위치 |
+|---|---|
+| 변수와 자료형 | 점수, 메뉴 번호, 문제와 선택지 저장 |
+| 조건문 | 메뉴 분기, 정답 판정, 최고 점수 비교 |
+| 반복문 | 메뉴 반복, 퀴즈 출제, 입력 재시도 |
+| 함수와 메서드 | 입력, 게임 진행, 저장 기능 분리 |
+| 클래스와 객체 | `Quiz`, `QuizGame`, `Storage` 구성 |
+| 파일과 JSON | 퀴즈 목록과 최고 점수 영속화 |
+| 예외 처리 | 잘못된 입력, 파일 없음·손상, 안전 종료 |
+| Git | 기능별 커밋, 브랜치 생성·병합, 원격 저장소 동기화 |
