@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Any
 
@@ -253,6 +254,7 @@ class QuizGame:
 
     def save_state(self) -> None:
         """현재 게임 상태의 저장을 Storage에 요청한다."""
+        time.sleep(5)
         self.storage.save(self.quizzes, self.best_score)
 
 
