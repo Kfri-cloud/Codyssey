@@ -1,5 +1,4 @@
 """별자리 퀴즈 게임."""
-
 from __future__ import annotations
 
 import json
