@@ -1,0 +1,75 @@
+{
+  "quizzes": [
+    {
+      "question": "사자자리의 영어 이름은 무엇일까요?",
+      "choices": [
+        "Leo",
+        "Gemini",
+        "Pisces",
+        "Aries"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "쌍둥이자리의 영어 이름은 무엇일까요?",
+      "choices": [
+        "Gemini",
+        "Taurus",
+        "Virgo",
+        "Libra"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "물고기자리의 영어 이름은 무엇일까요?",
+      "choices": [
+        "Pisces",
+        "Cancer",
+        "Scorpio",
+        "Aquarius"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "황도 12궁에서 양을 상징하는 별자리는 무엇일까요?",
+      "choices": [
+        "양자리",
+        "염소자리",
+        "황소자리",
+        "천칭자리"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "물병자리의 영어 이름은 무엇일까요?",
+      "choices": [
+        "Aquarius",
+        "Capricorn",
+        "Sagittarius",
+        "Cancer"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "처녀자리를 뜻하는 영어 이름은 무엇일까요?",
+      "choices": [
+        "Virgo",
+        "Cancer",
+        "Libra",
+        "Leo"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "천칭자리의 영어 이름은 무엇일까요?",
+      "choices": [
+        "Libra",
+        "Taurus",
+        "Aquarius",
+        "Gemini"
+      ],
+      "answer": 1
+    }
+  ],
+  "best_score": null
+}
