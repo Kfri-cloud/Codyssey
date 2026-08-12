@@ -69,7 +69,17 @@
         "Gemini"
       ],
       "answer": 1
+    },
+    {
+      "question": "별을 영어로?",
+      "choices": [
+        "apple",
+        "star",
+        "start",
+        "still"
+      ],
+      "answer": 2
     }
   ],
-  "best_score": null
+  "best_score": 8
 }
